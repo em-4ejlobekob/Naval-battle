@@ -4,8 +4,8 @@ import assets
 
 
 class Cell(Field):
-    def __init__(self, x, y):
-        Field.__init__(self, x, y)
+    def __init__(self, x, y, fild):
+        Field.__init__(self, fild.start_x, fild.start_y, fild.player, fild.game)
 
         """
         status: 

@@ -4,12 +4,13 @@ from random import randint
 
 class Game:
 
-    def __init__(self):
-        self.project_name = None
-        self.status = "setting"
+    def __init__(self, project_name):
+        self.project_name = project_name
+        self.status = None
         self.field_size = 10
         self.ship_types = None
         self.turn = None
+        self.player_status = 1
         self.players = []
 
     def set_turn(self):

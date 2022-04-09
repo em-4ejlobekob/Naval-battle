@@ -3,8 +3,8 @@ from Field import Field
 
 
 class Player(Game):
-    def __init__(self, login, password):
-        Game.__init__(self)
+    def __init__(self, login, password, game):
+        Game.__init__(self, game.project_name)
         self.login = login
         self.password = password
         self.stats = {}
