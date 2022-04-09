@@ -1,7 +1,9 @@
-from venv.Gggame import Game
+from abc import ABC
+
+from Game import Game
 
 
-class Settings(Game):
+class Settings(Game, ABC):
     def __init__(self):
         Game.__init__(self)
 

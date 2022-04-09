@@ -1,5 +1,6 @@
 from Field import Field
 import pygame
+import assets
 
 
 class Cell(Field):
@@ -24,8 +25,6 @@ class Cell(Field):
 
     def draw(self):
         if self.status == 6:
-            self.project_name.blit(pygame.image.load('BLUE_CROSS.png'), (self.x, self.y))
+            self.project_name.blit(pygame.image.load('assets/BLUE_CROSS.png'), (self.x, self.y))
         elif self.status == 7:
-            self.project_name.blit(pygame.image.load('MIST.png'), (self.x, self.y))
-
-
+            self.project_name.blit(pygame.image.load('assets/MIST.png'), (self.x, self.y))

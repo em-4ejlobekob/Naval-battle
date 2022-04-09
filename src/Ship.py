@@ -1,6 +1,7 @@
 from Field import Field
 import pygame
 from Cell import Cell
+import assets
 
 
 class Ship(Field):
@@ -19,8 +20,6 @@ class Ship(Field):
         self.y = y
         self.hits = 0
         self.cells = []
-        #  x = (self.x - self.start_x - 50) / 38
-        #  y = (self.y - self.start_y - 36) / 38
         for i in range(0, size):
             self.cells.append([x, y, 1])
 
@@ -37,14 +36,14 @@ class Ship(Field):
         if self.rotation == 'H':
             for j in range(self.size):
                 if self.cells[j][2]:
-                    self.project_name.blit(pygame.image.load('BLUE.png'), (a, b))
+                    self.project_name.blit(pygame.image.load('assets/BLUE.png'), (a, b))
                 else:
-                    self.project_name.blit(pygame.image.load('BLUE_CROSS.png.png'), (a, b))
+                    self.project_name.blit(pygame.image.load('assets/BLUE_CROSS.png'), (a, b))
                 a += 38
         else:
             for j in range(self.size):
                 if self.cells[j][2]:
-                    self.project_name.blit(pygame.image.load('BLUE.png'), (a, b))
+                    self.project_name.blit(pygame.image.load('assets/BLUE.png'), (a, b))
                 else:
-                    self.project_name.blit(pygame.image.load('BLUE_CROSS.png.png'), (a, b))
+                    self.project_name.blit(pygame.image.load('assets/BLUE_CROSS.png'), (a, b))
                 b += 38

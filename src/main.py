@@ -4,6 +4,7 @@ from Ship import Ship
 from Field import Field
 from Cell import Cell
 
+
 pygame.init()
 fild_1_x, fild_1_y = 30, 30
 fild_2_x, fild_2_y = 790, 30
@@ -11,10 +12,8 @@ BattleShip = pygame.display.set_mode((1600, 800))  # name of the window
 pygame.display.set_caption("Battles")  # title of the window
 fild_1, fild_1.project_name = Field(fild_1_x, fild_1_y), BattleShip
 fild_2, fild_2.project_name = Field(fild_2_x, fild_2_y), BattleShip
-fild_1.start_x = fild_1_x
-fild_1.start_y = fild_1_y
-fild_2.start_x = fild_2_x
-fild_2.start_y = fild_2_y
+fild_1.start_x, fild_1.start_y = fild_1_x, fild_1_y
+fild_2.start_x, fild_2.start_y = fild_2_x, fild_2_y
 width, height, speed = 38, 38, 38
 x_def, y_def = 50, 36
 x, y = x_def + fild_1_x, y_def + fild_1_y
@@ -58,8 +57,8 @@ def draw_window(object_list):
 
 def draw_swap():
     BattleShip.fill((0, 0, 0))
-    f1 = pygame.font.Font(None, 100)
-    text1 = f1.render('Очередь другого игрока, нажмите "N"', True, (255, 255, 255))
+    f = pygame.font.Font(None, 100)
+    text1 = f.render('Очередь другого игрока, нажмите "N"', True, (255, 255, 255))
     BattleShip.blit(text1, (10, 50))
     pygame.display.update()  # обновляет дисплей
 
@@ -70,6 +69,8 @@ def red_movement_start(keys_):
         draw = 0
     if keys_[pygame.K_c] and start_1_flag + start_2_flag:
         flag_ship += 1
+        while pygame.event == pygame.KEYDOWN:
+            pass
     if keys_[pygame.K_SPACE] and flag_size:
         if flag_ship % 2 == 0:
             sh = Ship(size, 'H', x - 1, y - 1, 0)
@@ -132,8 +133,7 @@ def red_movement_game(keys_, fild):
     if keys_[pygame.K_SPACE]:
         x1 = (x - fild.start_x - 50) / 38
         y1 = (y - fild.start_y - 36) / 38
-        #print([x1, y1, 1])
-        #print(fild.field_cells)
+
         if [x1, y1] in fild.field_cells:
             cell = Cell(x, y)
             cell.project_name = BattleShip
@@ -203,7 +203,6 @@ while process:
 
     keys = pygame.key.get_pressed()  # список кнопок, которые сейчас нажимаются
 
-    #print(game_1_flag, game_2_flag)
 
     if draw:
         draw_swap()
@@ -218,6 +217,8 @@ while process:
 
     if start:
         red_movement_start(keys)
+        while pygame.key == pygame.KEYDOWN:
+            pass
     else:
         if game_1_flag == 1:
             red_movement_game(keys, fild_2)
@@ -246,9 +247,6 @@ while process:
     elif start_2_flag:
         draw = 1
         start_2_flag = 0
-
-
-
 
     pygame.display.update()  # обновляет дисплей
 
