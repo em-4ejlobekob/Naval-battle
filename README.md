@@ -12,5 +12,5 @@ cd BattleShips_M_D
 sudo apt update
 sudo apt install python-pygame
 git clone https://github.com/em-4ejlobekob/ProjectX.git -b checkpoint_1
-cd Project
+cd ProjectX/Project/src
 python3 main.py
