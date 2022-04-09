@@ -1,5 +1,5 @@
 from Game import Game
-from Field import Field
+from Fild import Fild
 
 
 class Player(Game):

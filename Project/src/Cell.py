@@ -1,11 +1,11 @@
-from Field import Field
+from Fild import Fild
 import pygame
 import assets
 
 
-class Cell(Field):
+class Cell(Fild):
     def __init__(self, x, y, fild):
-        Field.__init__(self, fild.start_x, fild.start_y, fild.player, fild.game)
+        Fild.__init__(self, fild.start_x, fild.start_y, fild.player, fild.game)
 
         """
         status: 
