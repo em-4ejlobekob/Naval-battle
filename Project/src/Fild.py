@@ -1,3 +1,4 @@
+import assets
 from Global import *
 
 
@@ -18,6 +19,7 @@ class Fild(Game):
         self.ship_size = [4, 3, 2, 1]
         self.counter = 0
         self.rotation = 'H'
+        self.ships = []
 
     def draw(self):
         self.project_name.blit(pygame.image.load('assets/FILD.png'), (self.start_x, self.start_y))
@@ -27,6 +29,7 @@ class Fild(Game):
     def install_ship(self, x_, y_):
         x_ = (x_ - self.start_x - x_def) // width + 1
         y_ = (y_ - self.start_y - y_def) // height + 1
+        print(x_, y_)
         for i in range(self.size_of_ship_now):
             if self.rotation == 'H':
                 self.fild_cells.append([x_ + i, y_])
