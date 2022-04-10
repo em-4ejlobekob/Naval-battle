@@ -19,7 +19,7 @@ class Fild(Game):
         self.ship_size = [4, 3, 2, 1]
         self.counter = 0
         self.rotation = 'H'
-        self.ships = []
+        self.ships = set()
 
     def draw(self):
         self.project_name.blit(pygame.image.load('assets/FILD.png'), (self.start_x, self.start_y))
@@ -49,3 +49,30 @@ class Fild(Game):
             self.rotation = 'V'
         else:
             self.rotation = 'H'
+
+
+class Button:
+    def __init__(self, width_, height_, color1, color2, color):
+        self.width = width_
+        self.height = height_
+        self.color1 = color1
+        self.color2 = color2
+        self.color = color
+
+    def draw(self, x, y, message, action):
+
+        mouse = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
+
+        if x < mouse[0] < x + self.width and y < mouse[1] < y + self.height:
+            pygame.draw.rect(BattleShip, self.color1, (x, y, self.width, self.height))
+            if click[0] == 1:
+                action()
+                start_flag = 1
+
+        else:
+            pygame.draw.rect(BattleShip, self.color2, (x, y, self.width, self.height))
+
+        font = pygame.font.Font(None, 18)
+        text = font.render(message, True, self.color)
+        BattleShip.blit(text, (x + 10, y + 10))
