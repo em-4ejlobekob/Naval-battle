@@ -1,65 +1,34 @@
-from Global import *
-from Fild import Fild
+import pygame
+from Globals import *
 
 
-class Ship(Fild):
+class Ship:
 
-    def __init__(self, x_, y_, fild):
-        Fild.__init__(self, fild.start_x, fild.start_y, fild.player, fild.game)
-
-        self.fild_cells = fild.fild_cells
-        self.ship_collection = fild.ship_collection
-        self.size = fild.size_of_ship_now
-        self.rotation = fild.rotation
-        self.x, self.y = x_, y_
+    def __init__(self, x, y, size, rotation):
+        self.display = BattleShip
+        self.size = size
+        self.x, self.y = x, y
         self.hits = []
         self.cells = []
+        self.rotation = rotation
 
         if self.rotation == 'H':
             self.dx, self.dy = 1, 0
         else:
             self.dx, self.dy = 0, 1
 
-        a_, b_ = self.x, self.y
-        for i in range(self.size):
-            x_ = (a_ - self.start_x - x_def) // width + 1
-            y_ = (b_ - self.start_y - y_def) // height + 1
-            self.cells.append([x_ + 1, y_ + 1])
-            if self.rotation == 'H':
-                a_ += width
-            else:
-                b_ += height
+    # def test(self)
 
-    def test(self):
-        x_ = (self.x - self.start_x - x_def) // width + 1
-        y_ = (self.y - self.start_y - y_def) // height + 1
-        if self.dx:
-            x_test, y_test = self.size + 2, 3
-        else:
-            x_test, y_test = 3, self.size + 2
-        for i in range(x_, x_ + x_test, 1):
-            for j in range(y_, y_ + y_test, 1):
-                if [i, j] in self.fild_cells or self.dx * x_ + self.dy * y_ + self.size > 10:
-                    return False
-        if self.ship_collection[-1]:
-            return True
-        else:
-            return False
-
-    def draw(self):
-        a_, b_ = self.x, self.y
+    def draw(self, fild_x, fild_y):
+        a, b = fild_x + 39 * (self.x - 1), fild_y + 39 * (self.y - 1)
         for j in range(self.size):
-            x_ = (a_ - self.start_x - x_def) // width + 1
-            y_ = (b_ - self.start_y - y_def) // height + 1
-            if self.dx * x_ + self.dy * y_ < 10 and [x_ + 1, y_ + 1] not in self.hits:
-                self.project_name.blit(pygame.image.load('assets/BLUE.png'), (a_, b_))
+
+            if self.dx * (self.x + j) + self.dy * (self.y + j) <= 10 and [self.x + j, self.y + j] not in self.hits:
+                self.display.blit(pygame.image.load('assets/BLUE.png'), (a, b))
             else:
-                self.project_name.blit(pygame.image.load('assets/RED.png'), (a_, b_))
+                self.display.blit(pygame.image.load('assets/RED.png'), (a, b))
 
             if self.rotation == 'H':
-                a_ += width
+                a += 39
             else:
-                b_ += height
-
-    def delete(self):
-        pass
+                b += 39
