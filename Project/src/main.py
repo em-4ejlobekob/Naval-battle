@@ -34,14 +34,30 @@ while process:
             f1 = fild_1.draw(fild_now.player)
             f2 = fild_2.draw(fild_now.player)
 
-            if (f1 == 'end_start' and fild_1.game == 'start') or (f1 == 'end_part'):
+            if f1 == 'end_start' and fild_1.game == 'start':
+                if next_button.draw(1200, 600, 'next player', true_function):
+                    stop_screen()
+                    fild_1.game = 'stop'
+                    fild_now = change_fild(fild_now, fild_1, fild_2)
+                    f1 = None
+
+            if f1 == 'end_part':
                 if next_button.draw(1200, 600, 'next player', true_function):
                     stop_screen()
                     fild_1.game = 'game'
                     fild_now = change_fild(fild_now, fild_1, fild_2)
                     f1 = None
 
-            if (f2 == 'end_start' and fild_2.game == 'start') or (f2 == 'end_part'):
+            if f2 == 'end_start' and fild_2.game == 'start':
+                if next_button.draw(1200, 600, 'next player', true_function):
+                    stop_screen()
+                    fild_1.game = 'game'
+                    fild_2.game = 'game'
+                    fild_now = change_fild(fild_now, fild_1, fild_2)
+                    player = fild_now.player
+                    f2 = None
+
+            if f2 == 'end_part':
                 if next_button.draw(1200, 600, 'next player', true_function):
                     stop_screen()
                     fild_2.game = 'game'
