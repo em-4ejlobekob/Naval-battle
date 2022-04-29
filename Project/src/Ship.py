@@ -1,9 +1,14 @@
-import pygame
-from Globals import *
+import variables as var
+
+from Globals import BattleShip, pygame
 
 
 class Ship:
+    """Класс Корабль
 
+    Основная задача класса рисовать во время расстановки кораблей выбранный корабль на поле
+
+    """
     def __init__(self, x, y, size, rotation):
         self.display = BattleShip
         self.size = size
@@ -17,18 +22,18 @@ class Ship:
         else:
             self.dx, self.dy = 0, 1
 
-    # def test(self)
-
     def draw(self, fild_x, fild_y):
-        a, b = fild_x + 39 * (self.x - 1), fild_y + 39 * (self.y - 1)
+        """Рисует корабль на поле во время расстановке кораблей"""
+        a, b = fild_x + var.cell_wight * (self.x - 1), fild_y + var.cell_height * (self.y - 1)
         for j in range(self.size):
 
-            if self.dx * (self.x + j) + self.dy * (self.y + j) <= 10 and [self.x + j, self.y + j] not in self.hits:
-                self.display.blit(pygame.image.load('assets/BLUE.png'), (a, b))
+            if self.dx * (self.x + j) + self.dy * (self.y + j) <= var.fild_size and \
+                    [self.x + j, self.y + j] not in self.hits:
+                self.display.blit(pygame.image.load(var.cell_BLUE_path), (a, b))
             else:
-                self.display.blit(pygame.image.load('assets/RED.png'), (a, b))
+                self.display.blit(pygame.image.load(var.cell_RED_path), (a, b))
 
             if self.rotation == 'H':
-                a += 39
+                a += var.cell_wight
             else:
-                b += 39
+                b += var.cell_height
