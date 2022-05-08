@@ -1,13 +1,12 @@
 import sys
+import buttons as bt
 import variables as var
 
 from Globals import main_font, BattleShip, pygame
-from buttons import change_button, menu_button
-
-laugh_sound = pygame.mixer.Sound(var.laugh_path)
 
 
 def laugh():
+    laugh_sound = pygame.mixer.Sound(var.laugh_path)
     pygame.mixer.Sound.play(laugh_sound)
     pygame.time.delay(300)
 
@@ -42,7 +41,7 @@ def stop_screen():
     process = True
     while process:
         BattleShip.fill((0, 0, 0))
-        if change_button.draw(var.change_bttn_x, var.change_bttn_y, 'To Battle!', true_function):
+        if bt.change_button.draw(var.change_bttn_x, var.change_bttn_y, 'To Battle!', true_function):
             process = False
         pygame.display.update()  # обновляет дисплей
         for i in pygame.event.get():
@@ -59,7 +58,7 @@ def winner_screen(player_number, fild):
         BattleShip.fill((0, 0, 0))
         BattleShip.blit(win, (var.win_x, var.win_y))
         print_txt(winner_player, var.winner_player_x, var.winner_player_y, main_font, var.cell_active_colour)
-        if menu_button.draw(var.menu_bttn_x, var.menu_bttn_y, 'To Menu', fild.to_menu):
+        if bt.menu_button.draw(var.menu_bttn_x, var.menu_bttn_y, 'To Menu', fild.to_menu):
             process = False
         pygame.display.update()  # обновляет дисплей
         for i in pygame.event.get():

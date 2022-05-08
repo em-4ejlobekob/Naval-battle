@@ -1,8 +1,8 @@
 import variables as var
 
 from Cell import Cell
-from Ship import Ship
 from Globals import BattleShip, pygame
+from Ship import Ship
 
 
 class Fild:
