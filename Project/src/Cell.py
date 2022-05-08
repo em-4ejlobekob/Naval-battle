@@ -1,30 +1,53 @@
-from Fild import Fild
-import pygame
-import assets
+import variables as var
+
+from Globals import BattleShip, pygame
 
 
-class Cell(Fild):
-    def __init__(self, x, y, fild):
-        Fild.__init__(self, fild.start_x, fild.start_y, fild.player, fild.game)
+class Cell:
+    """Класс Клетка
 
-        """
-        status: 
-        0 - клетка свободна 
-        1 - рядом с клеткой корабль
-        2 - рядом с клеткой два корабля
-        3 - рядом с клеткой три корабля
-        4 - рядом с клектой четыре корабля
-        5 - на клетке корабль
-        6 - на клетке уничтоженный корабль
-        7 - промах
-        """
+    Экземпляром класса является клетка игрового поля
 
+    """
+    def __init__(self, x, y, player):
+        self.display = BattleShip
+        self.player = player
+        self.status = '0'
         self.x = x
         self.y = y
-        self.status = -1
+        self.hit = 0
+        self.ship = 0
+        self.height = var.cell_height
+        self.wight = var.cell_wight
+        self.active_colour = var.cell_active_colour
+        self.inactive_colour = var.cell_inactive_colour
 
-    def draw(self):
-        if self.status == 6:
-            self.project_name.blit(pygame.image.load('assets/BLUE_CROSS.png'), (self.x, self.y))
-        elif self.status == 7:
-            self.project_name.blit(pygame.image.load('assets/MIST.png'), (self.x, self.y))
+    def draw(self, x, y, player):
+        """Рисует клетку в нужном цвете в зависимости от статуса игры и того, есть ли на ней корабль"""
+        coord = None
+        mouse = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
+
+        if x < mouse[0] <= x + self.wight and y < mouse[1] <= y + self.height:
+
+            self.display.blit(pygame.image.load(var.cell_BLUE_path), (x, y))
+            coord = [[self.x, self.y], 1] if click[0] else [[self.x, self.y], 0]
+
+        if self.player == player:
+
+            if self.status == 'ship':
+                self.display.blit(pygame.image.load(var.cell_BLUE_path), (x, y))
+            elif self.status == 'hit':
+                self.display.blit(pygame.image.load(var.cell_MIST_path), (x, y))
+            elif self.status == 'ship_hit':
+                self.display.blit(pygame.image.load(var.cell_RED_path), (x, y))
+
+        elif self.player != player:
+
+            if self.status == 'hit':
+                self.display.blit(pygame.image.load(var.cell_MIST_path), (x, y))
+            elif self.status == 'ship_hit':
+                self.display.blit(pygame.image.load(var.cell_RED_CROSS_path), (x, y))
+
+        pygame.draw.rect(self.display, self.inactive_colour, (x, y, self.wight, self.height), var.frame_wight)
+        return coord
